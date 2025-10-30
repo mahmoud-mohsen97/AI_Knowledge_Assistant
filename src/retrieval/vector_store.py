@@ -129,17 +129,25 @@ class VectorStore:
         logger.info(f"Found {len(json_files)} chunk files")
 
         for json_file in json_files:
+            # Skip all_chunks.json to avoid loading duplicates
+            # (it contains all chunks that are also in individual files)
+            if json_file.name == "all_chunks.json":
+                logger.info(
+                    f"Skipping {json_file.name} (combined file, using individual chunks instead)"
+                )
+                continue
+
             try:
                 with open(json_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
 
-                    # Handle both individual chunk files and all_chunks.json
+                    # Handle both individual chunk files and any other list format
                     if isinstance(data, list):
-                        # This is a list of chunks (e.g., all_chunks.json)
+                        # This is a list of chunks (shouldn't happen with individual files, but handle it)
                         logger.info(f"{json_file.name} contains {len(data)} chunks")
                         chunks.extend(data)
                     elif isinstance(data, dict):
-                        # This is a single chunk file
+                        # This is a single chunk file (expected format)
                         chunks.append(data)
                     else:
                         logger.warning(

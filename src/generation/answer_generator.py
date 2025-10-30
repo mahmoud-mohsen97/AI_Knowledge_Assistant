@@ -117,7 +117,6 @@ class AnswerGenerator:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                temperature=0.3,
                 response_format={"type": "json_object"},
             )
 
@@ -215,7 +214,6 @@ class AnswerGenerator:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                temperature=0.3,
                 response_format={"type": "json_object"},
             )
 

@@ -19,7 +19,7 @@ from src.config.prompts import (
 load_dotenv()
 
 
-def generate_summary(json_file_path, model="gpt-5-mini", verbose=True):
+def generate_summary(json_file_path, model="gpt-4.1-mini", verbose=True):
     """Generate a summary for a document JSON file."""
 
     api_key = os.environ.get("OPENAI_API_KEY")
@@ -53,8 +53,6 @@ def generate_summary(json_file_path, model="gpt-5-mini", verbose=True):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        temperature=0.5,
-        max_tokens=500,
     )
 
     summary = response.choices[0].message.content.strip()

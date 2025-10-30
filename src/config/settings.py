@@ -63,7 +63,7 @@ class Config:
     RERANKER_MODEL: str = os.getenv(
         "RERANKER_MODEL", "jinaai/jina-reranker-v2-base-multilingual"
     )
-    LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-5-mini")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4.1-mini")
 
     # Retrieval Configuration
     RETRIEVAL_TOP_K: int = int(os.getenv("RETRIEVAL_TOP_K", "20"))
@@ -78,12 +78,16 @@ class Config:
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
     @classmethod
-    def validate(cls) -> bool:
-        """Validate required configuration"""
+    def validate(cls, skip_chunks_check: bool = False) -> bool:
+        """Validate required configuration
+
+        Args:
+            skip_chunks_check: Skip validation of chunks directory (used during startup before ingestion)
+        """
         if not cls.OPENAI_API_KEY:
             raise ValueError("OPENAI_API_KEY is required")
 
-        if not cls.PROCESSED_CHUNKS_DIR.exists():
+        if not skip_chunks_check and not cls.PROCESSED_CHUNKS_DIR.exists():
             raise ValueError(f"Chunks directory not found: {cls.PROCESSED_CHUNKS_DIR}")
 
         return True

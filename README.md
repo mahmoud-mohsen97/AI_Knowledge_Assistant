@@ -70,5 +70,5 @@ curl -X POST "http://localhost:8000/answer" \
 - **Vector DB:** Qdrant
 - **Embeddings:** OpenAI text-embedding-3-large
 - **Reranker:** Jina AI (jina-reranker-v2-base-multilingual)
-- **LLM:** GPT-5-mini
+- **LLM:** gpt-4.1-mini
 - **API:** FastAPI

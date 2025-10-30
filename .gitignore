@@ -36,7 +36,6 @@ wheels/
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
 
 # Testing
 .pytest_cache/
@@ -81,3 +80,6 @@ qdrant_storage/
 
 # Docker
 .dockerignore
+
+*.json
+*.txt

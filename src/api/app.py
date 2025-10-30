@@ -49,10 +49,46 @@ async def startup_event():
     logger.info("=" * 80)
 
     try:
-        # Validate configuration
+        # Validate configuration (skip chunks check initially)
         logger.info("Validating configuration...")
-        config.validate()
+        config.validate(skip_chunks_check=True)
         logger.info("Configuration validated")
+
+        # Check if chunks directory exists and has data
+        if not config.PROCESSED_CHUNKS_DIR.exists() or not any(
+            config.PROCESSED_CHUNKS_DIR.glob("*.json")
+        ):
+            logger.warning("Chunks directory not found or empty")
+            logger.info("Running ingestion pipeline to create chunks...")
+
+            try:
+                # Import and run the ingestion pipeline
+                from src.ingestion.pipeline import process_all_documents
+
+                # Ensure necessary directories exist
+                config.create_directories()
+
+                # Run ingestion pipeline
+                process_all_documents(
+                    json_dir="data/processed/pdf_extracts",
+                    image_dir="data/processed/pdf_images",
+                    output_dir="data/processed/visual_chunks",
+                    pdf_dir="data/raw/docs",
+                    extract_first=True,
+                    verbose=True,
+                    create_final_chunks=True,
+                    faq_path="data/raw/faq.json",
+                    tickets_path="data/raw/tickets_resolved.txt",
+                    doc_metadata_path="data/raw/doc_metadata.json",
+                    all_chunks_dir="data/processed/all_chunks",
+                )
+                logger.info("✓ Ingestion pipeline completed successfully")
+            except Exception as e:
+                logger.error(f"Error running ingestion pipeline: {e}", exc_info=True)
+                logger.warning("Continuing startup without chunks...")
+        else:
+            chunk_count = len(list(config.PROCESSED_CHUNKS_DIR.glob("*.json")))
+            logger.info(f"✓ Found {chunk_count} chunk files")
 
         # Initialize vector store (auto-index if empty)
         logger.info("Initializing vector store...")
