@@ -44,11 +44,19 @@ async def answer_endpoint(request: QueryRequest):
         # Convert citations to Citation objects
         citations = []
         for c in result["citations"]:
+            # Safely convert page_num to int, handle invalid values
+            page_num = c.get("page_num")
+            if page_num is not None:
+                try:
+                    page_num = int(page_num) if page_num else None
+                except (ValueError, TypeError):
+                    page_num = None  # Set to None if conversion fails
+
             citations.append(
                 Citation(
                     doc_id=c.get("doc_id", ""),
                     section=c.get("section", ""),
-                    page_num=c.get("page_num"),
+                    page_num=page_num,
                     chunk_id=c.get("chunk_id"),
                 )
             )

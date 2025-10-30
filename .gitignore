@@ -1,4 +1,83 @@
+# Environment
 .env
 .venv
-__pycache__
-.ruff_cache
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Linting
+.ruff_cache/
+.mypy_cache/
+.pylint.d/
+
+# Logs
+logs/
+*.log
+
+# Data (keep structure, ignore content)
+data/raw/docs/**
+data/processed/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Models (keep structure, ignore trained models)
+models/**
+!models/.gitkeep
+
+# Outputs
+outputs/
+predictions/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qdrant
+qdrant_storage/
+
+# Docker
+.dockerignore
