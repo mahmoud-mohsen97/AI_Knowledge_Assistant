@@ -62,9 +62,7 @@ data/processed/**
 models/**
 !models/.gitkeep
 
-# Outputs
-outputs/
-predictions/
+
 
 # Temporary files
 *.tmp
