@@ -63,7 +63,7 @@ class Config:
     RERANKER_MODEL: str = os.getenv(
         "RERANKER_MODEL", "jinaai/jina-reranker-v2-base-multilingual"
     )
-    LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4.1-mini")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-5-nano")
 
     # Retrieval Configuration
     RETRIEVAL_TOP_K: int = int(os.getenv("RETRIEVAL_TOP_K", "20"))

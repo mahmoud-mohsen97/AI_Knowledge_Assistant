@@ -19,7 +19,7 @@ from src.config.prompts import (
 load_dotenv()
 
 
-def generate_summary(json_file_path, model="gpt-4.1-mini", verbose=True):
+def generate_summary(json_file_path, model="gpt-5-nano", verbose=True):
     """Generate a summary for a document JSON file."""
 
     api_key = os.environ.get("OPENAI_API_KEY")

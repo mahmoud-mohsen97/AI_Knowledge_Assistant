@@ -33,7 +33,7 @@ services:
       - QDRANT_HOST=qdrant
       - QDRANT_PORT=6333
       - QDRANT_COLLECTION_NAME=${QDRANT_COLLECTION_NAME:-insurance_knowledge_base}
-      - LLM_MODEL=${LLM_MODEL:-gpt-4.1-mini}
+      - LLM_MODEL=${LLM_MODEL:-gpt-5-nano}
       - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-large}
       - API_HOST=0.0.0.0
       - API_PORT=8000

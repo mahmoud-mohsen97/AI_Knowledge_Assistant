@@ -63,7 +63,7 @@ JINA_API_KEY=jina_9b637d292b934b9a92dd05ac6d63f2b4A5fL1wVg7sjE5aAkfx2aJ76UrMX4
 QDRANT_HOST=localhost
 QDRANT_PORT=6333
 QDRANT_COLLECTION_NAME=insurance_knowledge_base
-LLM_MODEL=gpt-4.1-mini
+LLM_MODEL=gpt-5-nano
 EMBEDDING_MODEL=text-embedding-3-large
 EOF
     echo "⚠️  Please edit .env and add your OPENAI_API_KEY"
