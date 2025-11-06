@@ -187,7 +187,16 @@ def create_all_chunks(
 
             # Get metadata for this document
             doc_id = extract_data.get("doc_metadata", {}).get("doc_id", "")
+
+            # If doc_id is empty, derive it from the filename
+            if not doc_id:
+                doc_id = pdf_file.stem  # filename without extension
+
             metadata = metadata_map.get(doc_id, {})
+
+            # If metadata is empty but we have a doc_id, populate basic metadata
+            if not metadata and doc_id:
+                metadata = {"doc_id": doc_id}
 
             chunks = process_pdf_extract(extract_data, metadata)
             all_chunks.extend(chunks)
