@@ -306,11 +306,11 @@ Submit a query and receive an answer with citations, steps, and warnings.
 {
   "query": "What is the deadline for submitting an appeal?",
   "language": "English",
-  "filters": {
-    "region": "KSA",
+  "filters": {           # Optional
+    "region": "KSA", 
     "doc_type": "process"
   },
-  "skip_query_analysis": false
+  "skip_query_analysis": false           # Optional
 }
 ```
 
